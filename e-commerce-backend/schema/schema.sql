@@ -1,0 +1,5 @@
+-- Place your full schema.sql here (enums, tables, indexes, triggers, pgvector, etc.)
+-- This file is executed automatically on server start when the check table does not exist.
+--
+-- Example: Copy content from your migrations or consolidate into this file.
+-- The init script checks for the 'users' table by default before running.

@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#1F0A0A"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg6)"/>
+  <rect x="360" y="320" width="420" height="150" rx="75" fill="#111827"/>
+  <circle cx="445" cy="395" r="18" fill="#EF4444"/>
+  <text x="510" y="410" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="46" font-weight="700">4K</text>
+  <path d="M780 395H900" stroke="#CBD5E1" stroke-width="20" stroke-linecap="round"/>
+  <rect x="900" y="362" width="80" height="66" rx="12" fill="#475569"/>
+  <text x="100" y="640" fill="#FFF1F2" font-family="Arial, sans-serif" font-size="56" font-weight="700">PixelStream 4K Stick</text>
+  <text x="100" y="692" fill="#FDA4AF" font-family="Arial, sans-serif" font-size="30">Streaming stick • HDR • voice remote support</text>
+  <defs>
+    <linearGradient id="bg6" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7F1D1D"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>

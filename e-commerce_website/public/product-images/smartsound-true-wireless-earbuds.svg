@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#062C30"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg8)"/>
+  <rect x="420" y="380" width="360" height="150" rx="55" fill="#0F172A"/>
+  <rect x="455" y="250" width="90" height="190" rx="45" fill="#E6FFFB"/>
+  <rect x="655" y="250" width="90" height="190" rx="45" fill="#E6FFFB"/>
+  <rect x="482" y="325" width="36" height="98" rx="18" fill="#14B8A6"/>
+  <rect x="682" y="325" width="36" height="98" rx="18" fill="#14B8A6"/>
+  <text x="100" y="640" fill="#F0FDFA" font-family="Arial, sans-serif" font-size="56" font-weight="700">SmartSound Earbuds</text>
+  <text x="100" y="692" fill="#5EEAD4" font-family="Arial, sans-serif" font-size="30">True wireless earbuds • ANC • 25 hour total battery</text>
+  <defs>
+    <linearGradient id="bg8" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#115E59"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>

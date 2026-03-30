@@ -1,0 +1,16 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#082414"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg11)"/>
+  <rect x="420" y="190" width="360" height="420" rx="38" fill="#0F172A"/>
+  <rect x="450" y="225" width="300" height="260" rx="18" fill="#14532D"/>
+  <path d="M500 290H700M500 355H700M500 420H700M560 225V485M640 225V485" stroke="#86EFAC" stroke-width="8"/>
+  <rect x="520" y="520" width="160" height="34" rx="14" fill="#22C55E"/>
+  <text x="100" y="640" fill="#F0FDF4" font-family="Arial, sans-serif" font-size="56" font-weight="700">EcoCharge 20000mAh</text>
+  <text x="100" y="692" fill="#86EFAC" font-family="Arial, sans-serif" font-size="30">Solar power bank • dual USB • outdoor ready</text>
+  <defs>
+    <linearGradient id="bg11" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#166534"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#291406"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg10)"/>
+  <rect x="410" y="250" width="380" height="300" rx="48" fill="#1F2937"/>
+  <circle cx="535" cy="400" r="78" fill="#111827" stroke="#FDBA74" stroke-width="12"/>
+  <circle cx="665" cy="400" r="78" fill="#111827" stroke="#FDBA74" stroke-width="12"/>
+  <circle cx="535" cy="400" r="30" fill="#F59E0B"/>
+  <circle cx="665" cy="400" r="30" fill="#F59E0B"/>
+  <text x="100" y="640" fill="#FFF7ED" font-family="Arial, sans-serif" font-size="56" font-weight="700">NanoSound Speaker</text>
+  <text x="100" y="692" fill="#FDBA74" font-family="Arial, sans-serif" font-size="30">Portable Bluetooth speaker • deep bass • IPX7</text>
+  <defs>
+    <linearGradient id="bg10" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9A3412"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,18 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#140D22"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg3)"/>
+  <path d="M420 420C420 250 500 150 600 150C700 150 780 250 780 420" stroke="#E9D5FF" stroke-width="34" stroke-linecap="round"/>
+  <rect x="350" y="380" width="120" height="190" rx="60" fill="#111827"/>
+  <rect x="730" y="380" width="120" height="190" rx="60" fill="#111827"/>
+  <rect x="377" y="408" width="66" height="134" rx="33" fill="#A855F7"/>
+  <rect x="757" y="408" width="66" height="134" rx="33" fill="#A855F7"/>
+  <circle cx="930" cy="190" r="120" fill="#C084FC" fill-opacity="0.14"/>
+  <text x="100" y="640" fill="#F5F3FF" font-family="Arial, sans-serif" font-size="56" font-weight="700">NoisePro ANC</text>
+  <text x="100" y="692" fill="#D8B4FE" font-family="Arial, sans-serif" font-size="30">Wireless headphones • ANC • 30 hour battery</text>
+  <defs>
+    <linearGradient id="bg3" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E1065"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>

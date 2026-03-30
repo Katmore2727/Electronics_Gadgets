@@ -1,0 +1,22 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#09111F"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg2)"/>
+  <circle cx="920" cy="180" r="140" fill="#86EFAC" fill-opacity="0.15"/>
+  <rect x="280" y="150" width="640" height="360" rx="28" fill="#0F172A" stroke="#475569" stroke-width="10"/>
+  <rect x="305" y="175" width="590" height="310" rx="16" fill="url(#screen2)"/>
+  <path d="M210 540H990L1040 600H160L210 540Z" fill="#CBD5E1"/>
+  <rect x="490" y="567" width="220" height="12" rx="6" fill="#94A3B8"/>
+  <text x="100" y="650" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="56" font-weight="700">ZenBook Air 14</text>
+  <text x="100" y="702" fill="#86EFAC" font-family="Arial, sans-serif" font-size="30">Ultra-thin laptop • OLED display • Intel i7</text>
+  <defs>
+    <linearGradient id="bg2" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1C3B2C"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="screen2" x1="305" y1="175" x2="895" y2="485" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34D399"/>
+      <stop offset="0.5" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>

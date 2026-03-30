@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#1A0B2E"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg9)"/>
+  <rect x="360" y="280" width="500" height="240" rx="34" fill="#111827"/>
+  <circle cx="600" cy="400" r="84" fill="#1E293B" stroke="#C084FC" stroke-width="14"/>
+  <circle cx="600" cy="400" r="42" fill="#0F172A" stroke="#E9D5FF" stroke-width="8"/>
+  <rect x="760" y="325" width="60" height="46" rx="10" fill="#A855F7"/>
+  <rect x="760" y="385" width="60" height="46" rx="10" fill="#A855F7"/>
+  <text x="100" y="640" fill="#FAF5FF" font-family="Arial, sans-serif" font-size="56" font-weight="700">ProCam 4K Action Camera</text>
+  <text x="100" y="692" fill="#D8B4FE" font-family="Arial, sans-serif" font-size="30">Waterproof body • 4K 60fps • wide-angle lens</text>
+  <defs>
+    <linearGradient id="bg9" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#581C87"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>

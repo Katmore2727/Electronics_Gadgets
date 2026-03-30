@@ -1,0 +1,22 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#1C1304"/>
+  <rect x="70" y="70" width="1060" height="660" rx="40" fill="url(#bg4)"/>
+  <rect x="520" y="110" width="160" height="170" rx="40" fill="#334155"/>
+  <rect x="520" y="520" width="160" height="170" rx="40" fill="#334155"/>
+  <rect x="430" y="210" width="340" height="380" rx="90" fill="#0F172A"/>
+  <rect x="465" y="245" width="270" height="310" rx="56" fill="url(#screen4)"/>
+  <path d="M600 355L630 398H570L600 355Z" fill="#F8FAFC"/>
+  <path d="M600 458C646 458 684 420 684 374C684 328 646 290 600 290C554 290 516 328 516 374C516 420 554 458 600 458Z" stroke="#F8FAFC" stroke-width="10"/>
+  <text x="100" y="640" fill="#FFF7ED" font-family="Arial, sans-serif" font-size="56" font-weight="700">FitTrack Smartwatch</text>
+  <text x="100" y="692" fill="#FDBA74" font-family="Arial, sans-serif" font-size="30">Fitness watch • GPS • heart-rate monitoring</text>
+  <defs>
+    <linearGradient id="bg4" x1="70" y1="70" x2="1130" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C2D12"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="screen4" x1="465" y1="245" x2="735" y2="555" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+</svg>
