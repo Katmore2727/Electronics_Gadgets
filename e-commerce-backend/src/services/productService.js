@@ -162,17 +162,33 @@ export const getProductById = async (id) => {
  * Get all products with pagination, filtering, sorting
  */
 export const getAllProducts = async (query) => {
+  let categoryId = query.categoryId ? parseInt(query.categoryId, 10) : null;
+
+  if (!categoryId && query.category) {
+    const rawCategory = String(query.category).trim();
+
+    if (/^\d+$/.test(rawCategory)) {
+      categoryId = parseInt(rawCategory, 10);
+    } else {
+      const category = await Category.findBySlug(rawCategory);
+      categoryId = category?.id ?? null;
+    }
+  }
+
+  const sortBy = query.sortBy === 'newest' ? 'created_at' : (query.sortBy || 'created_at');
+  const sortOrder = query.sortBy === 'newest' ? 'desc' : (query.sortOrder || 'desc');
+
   const options = {
     page: query.page ? parseInt(query.page, 10) : 1,
     limit: query.limit ? parseInt(query.limit, 10) : 20,
-    categoryId: query.categoryId ? parseInt(query.categoryId, 10) : null,
+    categoryId,
     status: query.status || null,
     brand: query.brand || null,
     minPrice: query.minPrice != null ? parseFloat(query.minPrice) : null,
     maxPrice: query.maxPrice != null ? parseFloat(query.maxPrice) : null,
     search: query.search?.trim() || null,
-    sortBy: query.sortBy || 'created_at',
-    sortOrder: query.sortOrder || 'desc',
+    sortBy,
+    sortOrder,
   };
 
   return Product.findAll(options);

@@ -10,11 +10,12 @@ export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [filters, setFilters] = useState({
+  const filters = {
     search: searchParams.get('search') || '',
-    categoryId: searchParams.get('categoryId') || '',
+    category: searchParams.get('category') || searchParams.get('categoryId') || '',
     minPrice: searchParams.get('minPrice') || '',
     maxPrice: searchParams.get('maxPrice') || '',
     brand: searchParams.get('brand') || '',
@@ -23,7 +24,7 @@ export default function ProductsPage() {
     sortOrder: searchParams.get('sortOrder') || 'desc',
     page: parseInt(searchParams.get('page'), 10) || 1,
     limit: 20,
-  });
+  };
 
   // Fetch categories and brands on mount
   useEffect(() => {
@@ -37,51 +38,59 @@ export default function ProductsPage() {
         setBrands(brandRes.data?.data || []);
       } catch (error) {
         console.error('Failed to load filters:', error);
+        toast.error('Failed to load filters');
       }
     };
     fetchFilters();
   }, []);
 
   useEffect(() => {
-    const params = {};
-    Object.entries(filters).forEach(([k, v]) => {
-      if (v && v !== 'active') params[k] = v;
-    });
-    setSearchParams(params, { replace: true });
-  }, [filters]);
+    const loadProducts = async () => {
+      setLoading(true);
+      setError('');
 
-  useEffect(() => {
-    setLoading(true);
-    const params = Object.fromEntries(searchParams);
-    getProducts({ ...params, status: 'active' })
-      .then(({ data }) => {
+      try {
+        const params = Object.fromEntries(searchParams);
+        const { data } = await getProducts({ ...params, status: 'active' });
         setProducts(data.data);
         setPagination(data.pagination || {});
-      })
-      .catch(() => {
+      } catch (requestError) {
         setProducts([]);
+        setPagination({});
+        setError(requestError.response?.data?.message || 'Failed to load products');
         toast.error('Failed to load products');
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
   }, [searchParams]);
 
+  const updateFilters = (updates, { resetPage = true } = {}) => {
+    const nextParams = new URLSearchParams(searchParams);
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === '' || value == null) {
+        nextParams.delete(key);
+      } else {
+        nextParams.set(key, String(value));
+      }
+    });
+
+    if (resetPage) {
+      nextParams.delete('page');
+    }
+
+    setSearchParams(nextParams, { replace: true });
+  };
+
   const updateFilter = (key, value) => {
-    setFilters((f) => ({ ...f, [key]: value, page: 1 }));
+    updateFilters({ [key]: value });
   };
 
   const resetFilters = () => {
-    setFilters({
-      search: '',
-      categoryId: '',
-      minPrice: '',
-      maxPrice: '',
-      brand: '',
-      status: 'active',
-      sortBy: 'created_at',
-      sortOrder: 'desc',
-      page: 1,
-      limit: 20,
-    });
+    setSearchParams({}, { replace: true });
   };
 
   return (
@@ -106,13 +115,13 @@ export default function ProductsPage() {
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-2">Category</label>
             <select
-              value={filters.categoryId}
-              onChange={(e) => updateFilter('categoryId', e.target.value)}
+              value={filters.category}
+              onChange={(e) => updateFilter('category', e.target.value)}
               className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <option value="">All Categories</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
+                <option key={cat.id} value={cat.slug}>
                   {cat.name}
                 </option>
               ))}
@@ -164,8 +173,7 @@ export default function ProductsPage() {
               value={`${filters.sortBy}-${filters.sortOrder}`}
               onChange={(e) => {
                 const [sortBy, sortOrder] = e.target.value.split('-');
-                updateFilter('sortBy', sortBy);
-                updateFilter('sortOrder', sortOrder);
+                updateFilters({ sortBy, sortOrder });
               }}
               className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
@@ -188,6 +196,8 @@ export default function ProductsPage() {
         <div className="flex-1">
           {loading ? (
             <Loader />
+          ) : error ? (
+            <p className="text-center py-16 text-red-300">{error}</p>
           ) : products.length === 0 ? (
             <p className="text-slate-400 text-center py-16">No products found.</p>
           ) : (
@@ -200,7 +210,7 @@ export default function ProductsPage() {
               {pagination.totalPages > 1 && (
                 <div className="flex justify-center gap-2 mt-8">
                   <button
-                    onClick={() => updateFilter('page', pagination.page - 1)}
+                    onClick={() => updateFilters({ page: pagination.page - 1 }, { resetPage: false })}
                     disabled={pagination.page <= 1}
                     className="px-4 py-2 bg-slate-800 rounded-lg disabled:opacity-50 hover:bg-slate-700"
                   >
@@ -210,7 +220,7 @@ export default function ProductsPage() {
                     Page {pagination.page} of {pagination.totalPages}
                   </span>
                   <button
-                    onClick={() => updateFilter('page', pagination.page + 1)}
+                    onClick={() => updateFilters({ page: pagination.page + 1 }, { resetPage: false })}
                     disabled={pagination.page >= pagination.totalPages}
                     className="px-4 py-2 bg-slate-800 rounded-lg disabled:opacity-50 hover:bg-slate-700"
                   >

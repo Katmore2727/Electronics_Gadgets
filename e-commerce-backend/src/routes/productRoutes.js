@@ -60,6 +60,15 @@ router.patch(
   asyncHandler(productController.update)
 );
 
+router.put(
+  '/:id',
+  authenticate,
+  adminOnly,
+  validate(productIdParamSchema, 'params'),
+  validate(updateProductSchema),
+  asyncHandler(productController.update)
+);
+
 router.delete(
   '/:id',
   authenticate,

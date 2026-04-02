@@ -48,11 +48,15 @@ export const listProductsQuerySchema = Joi.object({
   page: Joi.number().integer().min(1).optional(),
   limit: Joi.number().integer().min(1).max(100).optional(),
   categoryId: Joi.number().integer().positive().optional(),
+  category: Joi.alternatives().try(
+    Joi.number().integer().positive(),
+    Joi.string().max(120).trim()
+  ).optional(),
   status: productStatus.optional(),
   brand: Joi.string().max(100).optional().trim(),
   minPrice: Joi.number().min(0).optional(),
   maxPrice: Joi.number().min(0).optional(),
   search: Joi.string().max(200).optional().trim(),
-  sortBy: Joi.string().valid('name', 'price', 'created_at', 'stock_quantity').optional(),
+  sortBy: Joi.string().valid('name', 'price', 'created_at', 'stock_quantity', 'newest').optional(),
   sortOrder: Joi.string().valid('asc', 'desc').optional(),
 });

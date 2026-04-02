@@ -1,4 +1,4 @@
-import api from '../../api/axiosConfig.js';
+import api, { buildApiUrl, buildAppUrl } from '../../api/axiosConfig.js';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('accessToken');
@@ -10,7 +10,7 @@ const getAuthHeaders = () => {
 };
 
 export const streamChatMessage = async ({ message, conversation, signal, onEvent }) => {
-  const response = await fetch('/api/chat/stream', {
+  const response = await fetch(buildApiUrl('/chat/stream'), {
     method: 'POST',
     headers: getAuthHeaders(),
     body: JSON.stringify({ message, conversation }),
@@ -68,4 +68,4 @@ export const streamChatMessage = async ({ message, conversation, signal, onEvent
 
 export const getChatSamples = () => api.get('/chat/samples');
 
-export const healthcheckChatbot = () => api.get('/health');
+export const healthcheckChatbot = () => fetch(buildAppUrl('/health'));

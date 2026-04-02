@@ -1,6 +1,16 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getCategories } from '../../api/productApi.js';
 
 export default function Footer() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories()
+      .then(({ data }) => setCategories((data.data || []).slice(0, 2)))
+      .catch(() => setCategories([]));
+  }, []);
+
   return (
     <footer className="bg-slate-900/50 border-t border-slate-800 mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -15,8 +25,16 @@ export default function Footer() {
             <h4 className="font-semibold text-white mb-4">Shop</h4>
             <ul className="space-y-2">
               <li><Link to="/products" className="text-slate-400 hover:text-cyan-400 text-sm">All Products</Link></li>
-              <li><Link to="/products?category=1" className="text-slate-400 hover:text-cyan-400 text-sm">Smartphones</Link></li>
-              <li><Link to="/products?category=2" className="text-slate-400 hover:text-cyan-400 text-sm">Laptops</Link></li>
+              {categories.map((category) => (
+                <li key={category.id}>
+                  <Link
+                    to={`/products?category=${category.slug}`}
+                    className="text-slate-400 hover:text-cyan-400 text-sm"
+                  >
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
