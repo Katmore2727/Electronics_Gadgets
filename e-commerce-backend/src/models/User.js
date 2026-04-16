@@ -28,7 +28,7 @@ export const findByEmail = async (email) => {
 
 export const findById = async (id) => {
   const result = await pool.query(
-    `SELECT id, email, first_name, last_name, role, phone, avatar_url, is_verified, created_at, updated_at
+    `SELECT id, email, first_name, last_name, role, phone, avatar_url, is_verified, assigned_admin_id, created_at, updated_at
      FROM users WHERE id = $1`,
     [id]
   );
@@ -46,6 +46,45 @@ export const saveRefreshToken = async (userId, tokenHash, expiresAt) => {
      VALUES ($1, $2, $3)`,
     [userId, tokenHash, expiresAt]
   );
+};
+
+export const assignToAdmin = async (userId, adminId) => {
+  // Verify admin exists and is admin
+  const admin = await pool.query(
+    'SELECT id FROM users WHERE id = $1 AND role = $2',
+    [adminId, USER_ROLES.ADMIN]
+  );
+  if (!admin.rows[0]) {
+    throw new Error('Invalid admin');
+  }
+
+  const result = await pool.query(
+    `UPDATE users SET assigned_admin_id = $2, updated_at = NOW()
+     WHERE id = $1 AND role = $3
+     RETURNING id, email, first_name, last_name, assigned_admin_id`,
+    [userId, adminId, USER_ROLES.CUSTOMER]
+  );
+  return result.rows[0];
+};
+
+export const getAssignedUsers = async (adminId) => {
+  const result = await pool.query(
+    `SELECT id, email, first_name, last_name, phone, avatar_url, is_verified, created_at
+     FROM users WHERE assigned_admin_id = $1 AND role = $2
+     ORDER BY created_at DESC`,
+    [adminId, USER_ROLES.CUSTOMER]
+  );
+  return result.rows;
+};
+
+export const getAllCustomers = async () => {
+  const result = await pool.query(
+    `SELECT id, email, first_name, last_name, phone, avatar_url, is_verified, assigned_admin_id, created_at
+     FROM users WHERE role = $1
+     ORDER BY created_at DESC`,
+    [USER_ROLES.CUSTOMER]
+  );
+  return result.rows;
 };
 
 export const findRefreshToken = async (userId, tokenHash) => {

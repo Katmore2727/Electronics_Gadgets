@@ -19,6 +19,7 @@ import { useAuth } from '../contexts/AuthContext.jsx';
 import { cancelOrder, getOrder, getOrderHistory } from '../api/orderApi.js';
 import Loader from '../components/common/Loader.jsx';
 import Button from '../components/common/Button.jsx';
+import OrderTracking from '../components/common/OrderTracking.jsx';
 
 const CANCEL_REASONS = [
   'Changed my mind',
@@ -285,7 +286,7 @@ function OrderDetails({ order, onCancelClick }) {
           )}
         </div>
 
-        <Timeline order={order} />
+        <OrderTracking order={order} />
 
         {notes.length > 0 && (
           <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5">

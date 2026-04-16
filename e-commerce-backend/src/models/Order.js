@@ -19,9 +19,20 @@ export const createOrder = async (client, data) => {
     paymentMethod: data.paymentMethod,
   };
 
+  // Calculate estimated delivery date (3-7 days from now)
+  const now = new Date();
+  const estimatedDeliveryDate = new Date(now);
+  estimatedDeliveryDate.setDate(now.getDate() + Math.floor(Math.random() * 5) + 3); // 3-7 days
+
+  // Initial status history
+  const initialStatusHistory = [{
+    status: 'placed',
+    timestamp: now.toISOString()
+  }];
+
   const result = await client.query(
-    `INSERT INTO orders (user_id, order_number, status, subtotal, tax, shipping_cost, total, payment_status, shipping_address, billing_address, notes)
-     VALUES ($1, $2, 'pending', $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO orders (user_id, order_number, status, subtotal, tax, shipping_cost, total, payment_status, shipping_address, billing_address, notes, status_history, estimated_delivery_date)
+     VALUES ($1, $2, 'pending', $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
      RETURNING *`,
     [
       data.userId,
@@ -34,6 +45,8 @@ export const createOrder = async (client, data) => {
       JSON.stringify(data.shippingAddress),
       JSON.stringify(billingAddress),
       data.notes ?? null,
+      JSON.stringify(initialStatusHistory),
+      estimatedDeliveryDate,
     ]
   );
   return result.rows[0];
@@ -143,14 +156,18 @@ export const findByUserId = async (userId, options = {}) => {
 };
 
 /**
- * Find all orders for admin (paginated)
+ * Find all orders for admin (paginated) - filtered by assigned users
  */
-export const findAll = async (options = {}) => {
+export const findAll = async (adminId, options = {}) => {
   const { page = 1, limit = 20 } = options;
   const offset = (page - 1) * limit;
 
   const countResult = await pool.query(
-    'SELECT COUNT(*)::int as total FROM orders'
+    `SELECT COUNT(*)::int as total
+     FROM orders o
+     JOIN users u ON u.id = o.user_id
+     WHERE u.assigned_admin_id = $1`,
+    [adminId]
   );
   const total = countResult.rows[0].total;
 
@@ -175,9 +192,10 @@ export const findAll = async (options = {}) => {
        FROM order_items oi
        WHERE oi.order_id = o.id
      ) items ON TRUE
+     WHERE u.assigned_admin_id = $1
      ORDER BY o.created_at DESC
-     LIMIT $1 OFFSET $2`,
-    [limit, offset]
+     LIMIT $2 OFFSET $3`,
+    [adminId, limit, offset]
   );
 
   return {
@@ -195,23 +213,31 @@ export const findAll = async (options = {}) => {
  * Update order status
  */
 export const updateStatus = async (id, status) => {
+  const now = new Date();
   const result = await pool.query(
-    `UPDATE orders SET status = $2, updated_at = NOW() WHERE id = $1 RETURNING *`,
-    [id, status]
+    `UPDATE orders
+     SET status = $2,
+         status_history = status_history || $3::jsonb,
+         updated_at = NOW()
+     WHERE id = $1
+     RETURNING *`,
+    [id, status, JSON.stringify([{ status, timestamp: now.toISOString() }])]
   );
   return result.rows[0];
 };
 
 export const updateStatusAndNotes = async (id, status, notes, paymentStatus = null) => {
+  const now = new Date();
   const result = await pool.query(
     `UPDATE orders
      SET status = $2,
          notes = $3,
          payment_status = COALESCE($4, payment_status),
+         status_history = status_history || $5::jsonb,
          updated_at = NOW()
      WHERE id = $1
      RETURNING *`,
-    [id, status, notes, paymentStatus]
+    [id, status, notes, paymentStatus, JSON.stringify([{ status, timestamp: now.toISOString() }])]
   );
   return result.rows[0];
 };

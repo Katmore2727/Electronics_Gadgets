@@ -37,7 +37,7 @@ export const getHistory = async (req, res) => {
 
 export const getAll = async (req, res) => {
   const { page, limit } = req.query;
-  const result = await orderService.getAllOrders({
+  const result = await orderService.getAllOrders(req.user.id, {
     page: page ? parseInt(page, 10) : 1,
     limit: limit ? parseInt(limit, 10) : 20,
   });

@@ -129,8 +129,8 @@ export const getOrderHistory = async (userId, options = {}) => {
   return Order.findByUserId(userId, options);
 };
 
-export const getAllOrders = async (options = {}) => {
-  return Order.findAll(options);
+export const getAllOrders = async (adminId, options = {}) => {
+  return Order.findAll(adminId, options);
 };
 
 /**

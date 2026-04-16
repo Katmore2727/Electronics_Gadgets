@@ -35,7 +35,12 @@ export default function LoginPage() {
         navigate(pending.fromPage || '/cart');
       } else {
         toast.success('Login successful!');
-        navigate('/');
+        // Redirect based on user role
+        if (data.data.user.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/');
+        }
       }
     } catch (err) {
       const message = err.response?.data?.message || 'Login failed';

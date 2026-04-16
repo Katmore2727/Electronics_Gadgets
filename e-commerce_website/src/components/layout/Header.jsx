@@ -34,9 +34,6 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-slate-300 hover:text-white transition-colors">Home</Link>
             <Link to="/products" className="text-slate-300 hover:text-white transition-colors">Products</Link>
-            {user?.role === 'admin' && (
-              <Link to="/admin" className="text-slate-300 hover:text-white transition-colors">Admin</Link>
-            )}
           </nav>
 
           <div className="flex items-center gap-4">

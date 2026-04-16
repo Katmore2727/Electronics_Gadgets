@@ -13,6 +13,9 @@ const runMigrations = async () => {
     '002_products_schema.sql',
     '003_cart_and_orders_schema.sql',
     '004_product_embeddings_schema.sql',
+    '005_reviews_schema.sql',
+    '006_user_admin_assignment.sql',
+    '007_order_tracking_enhancement.sql',
   ];
 
   const client = await pool.connect();
