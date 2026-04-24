@@ -7,7 +7,7 @@ import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useCart } from '../../contexts/CartContext.jsx';
 import { getChatSamples, streamChatMessage } from '../../services/api/chatService.js';
 
-const STORAGE_KEY = 'techhub-chat-session';
+const STORAGE_KEY = 'Yashub-chat-session';
 
 const defaultSuggestions = [
   'Find me noise-cancelling headphones under 5000',
