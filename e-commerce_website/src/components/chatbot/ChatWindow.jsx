@@ -198,9 +198,9 @@ export default function ChatWindow({
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-sm font-medium text-cyan-200">
               <Bot className="h-4 w-4" />
-              TechHub Copilot
+              Yashub Copilot
             </div>
-            <h2 className="mt-1 text-lg font-semibold">Shopping help, product answers, order guidance.</h2>
+            <h2 className="mt-1 text-lg font-semibold">Shopping help, product answers, order guidance</h2>
             <p className="mt-1 text-xs text-slate-300">
               {user
                 ? `Personalized with account context for user #${user.id}`
